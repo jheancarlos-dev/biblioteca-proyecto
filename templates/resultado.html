@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Resultado — Biblioteca{% endblock %}
+{% block content %}
+  <h1>Resultado del cálculo</h1>
+  {% if error %}
+    <p class="lede">Revisa los datos e inténtalo de nuevo.</p>
+    <div class="card">
+      <p class="error" role="alert">{{ error }}</p>
+      <a class="back" href="{{ url_for('index') }}">← Volver al formulario</a>
+    </div>
+  {% else %}
+    <p class="lede">Cálculo realizado para <strong>{{ tipo_usuario }}</strong>.</p>
+    <div class="card">
+      <dl class="ok">
+        <dt>Multa estimada</dt>
+        <dd>{{ "%.2f"|format(monto_multa) }} (unidades monetarias)</dd>
+        <dt>Fecha límite de devolución</dt>
+        <dd>{{ fecha_limite_devolucion.strftime("%d/%m/%Y") }}</dd>
+      </dl>
+      <a class="back" href="{{ url_for('index') }}">← Nuevo cálculo</a>
+    </div>
+  {% endif %}
+{% endblock %}
